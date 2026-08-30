@@ -144,11 +144,11 @@ function formatAmount($value): string
                             </td>
 
                             <td>
-                                <?= escape($deal['responsible'] ?? '') ?>
+                                <?= escape($deal['responsible']['name'] ?? '') ?>
                             </td>
 
                             <td>
-                                <?= escape($deal['company'] ?? '') ?>
+                                <?= escape($deal['company']['name'] ?? '') ?>
                             </td>
                         </tr>
 
