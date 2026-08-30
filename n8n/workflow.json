@@ -78,7 +78,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const data = [];\nconst errors = [];\n\nfor (const item of $input.all()) {\n  const deal = item.json.result;\n\n  if (deal) {\n    data.push({\n      id: deal.id,\n      title: deal.title ?? '',\n      amount: deal.amount ?? null,\n      responsible: deal.responsible?.name ?? '',\n      company: deal.company?.name ?? '',\n    });\n  } else {\n    const message =\n      item.json.error ?? 'Неизвестная ошибка получения сделки';\n\n    const idMatch = String(message).match(/ID\\s+(\\d+)/i);\n\n    errors.push({\n      id: idMatch ? Number(idMatch[1]) : null,\n      message: String(message),\n    });\n  }\n}\n\nreturn [\n  {\n    json: {\n      success: errors.length === 0,\n      total: data.length,\n      data,\n      errors,\n    },\n  },\n];"
+        "jsCode": "const data = [];\nconst errors = [];\n\nfor (const item of $input.all()) {\n  const deal = item.json.result;\n\n  if (deal) {\n    data.push({\n      id: deal.id,\n      title: deal.title ?? '',\n      amount: deal.amount ?? null,\n      responsible: {\n        id: deal.responsible?.id ?? null,\n        name: deal.responsible?.name ?? '',\n      },\n      company: {\n        id: deal.company?.id ?? null,\n        name: deal.company?.name ?? '',\n      },\n    });\n  } else {\n    const message =\n      item.json.error ?? 'Неизвестная ошибка получения сделки';\n\n    const idMatch = String(message).match(/ID\\s+(\\d+)/i);\n\n    errors.push({\n      id: idMatch ? Number(idMatch[1]) : null,\n      message: String(message),\n    });\n  }\n}\n\nreturn [\n  {\n    json: {\n      success: errors.length === 0,\n      total: data.length,\n      data,\n      errors,\n    },\n  },\n];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -168,7 +168,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "b7d8e102-c9ec-46eb-b0bc-f6dc64bb538b",
+  "versionId": "c0c7cb26-b464-484d-87a1-18bbf9e2dd32",
   "meta": {
     "instanceId": "af618e25b517669eabe9d999b995eb5e7c0d47aa33366658d704eedf961f3e5a"
   },
